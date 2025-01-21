@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Of The Day</title>
+    
+      
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #b1a4e9, #fad0c4);
+        }
+        .container {
+            text-align: center;
+            background: rgb(238, 197, 220);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507);
+            max-width: 400px;
+            position: relative;
+        }
+        .quote-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        blockquote {
+            font-size: 20px;
+            font-style: italic;
+            color: #15c9f7;
+            min-height: 120px;
+        }
+        .quote-box span {
+            display: block;
+            margin-top: -75px;
+            font-weight: bold;
+            color: #ff6b81;
+            font-size: 18px;
+        }
+        .quote-box button {
+            width: 150px;
+            height: 50px;
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: #ff6b81;
+            color: rgb(3, 3, 3);
+            cursor: pointer;
+        }
+        button:hover {
+            background: #f3acac;
+        }
+        /* Share options styling */
+        .share-options {
+            display: none;
+            margin-top: 25px;
+            background-color: white;
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px 0;
+        }
+        .share-options a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        .share-options a:hover {
+            transform: translateY(10px);
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+        }
+        .share-options a img {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+            padding-left: 10px;
+        }
+        .share-options a:hover img {
+            transform: scale(1.6);
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .quote-box {
+                padding: 20px;
+            }
+            blockquote {
+                font-size: 1em;
+            }
+            .quote-box button {
+                max-width: 100px;
+                font-size: 0.9em;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            .quote-box {
+                padding: 15px;
+            }
+            blockquote {
+                font-size: 0.9em;
+            }
+            .quote-box button {
+                font-size: 0.8em;
+                max-width: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quote-box">
+            <h2>Quote For You...!</h2>
+            <blockquote class="quote">“Our lives begin to end the day we become silent about things that matter.”</blockquote>
+            <span class="writer">― Martin Luther King Jr.</span>
+            <div>
+                <button id="Qbtn">New Quote ✨</button>
+                <button id="shareBtn">Share.. ➤</button>
+            </div>
+            <div class="share-options" id="shareOptions">
+                <a href="#" id="shareTwitter">Share Via  
+                     <img src="https://e7.pngegg.com/pngimages/708/311/png-clipart-twitter-twitter-thumbnail.png" alt="Twitter"></a>
+                <a href="https://www.threads.net/login" id="shareThreads">Share Via  
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Threads_%28app%29.svg/1200px-Threads_%28app%29.svg.png" alt="Threads"></a>
+                <a href="#" id="shareWhatsapp">Share Via  
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const quotes = [
+            { quote: `"You only live once, but if you do it right, once is enough."`, writer: `– Mae West` },
+            { quote: `"If you want to live a happy life, tie it to a goal, not to people or things."`, writer: `– Albert Einstein` },
+            { quote: `"Never let the fear of striking out keep you from playing the game."`, writer: `– Babe Ruth` },
+            { quote: '"Being different isnt a bad thing. I mean that you are brave enough to be yourself."', writer: "– Luna Lovegood" },
+            { quote: `"Your time is limited, so don’t waste it living someone else’s life."`, writer: `– Steve Jobs` },
+            { quote: `"In order to write about life first you must live it."`, writer: `– Ernest Hemingway` },
+            { quote: `"Life is not a problem to be solved, but a reality to be experienced."`, writer: `– Soren Kierkegaard` },
+            { quote: `"The unexamined life is not worth living."`, writer: `– Socrates` },
+            { quote: `"Turn your wounds into wisdom."`, writer: `– Oprah Winfrey` },
+            { quote: `"The purpose of our lives is to be happy."`, writer: `- Dalai Lama` },
+            { quote: `"Live for each second without hesitation."`, writer: `- Elton John` },
+        ];
+        let btn = document.querySelector("#Qbtn");
+        let quote = document.querySelector(".quote");
+        let writer = document.querySelector(".writer");
+        let shareBtn = document.querySelector("#shareBtn");
+        let shareOptions = document.querySelector("#shareOptions");
+        let shareTwitter = document.querySelector("#shareTwitter");
+        let shareWhatsapp = document.querySelector("#shareWhatsapp");
+        // Function to update the quote
+        function updateQuote() {
+            let randomIndex = Math.floor(Math.random() * quotes.length);
+            let randomQuote = quotes[randomIndex];
+            quote.innerHTML = randomQuote.quote;
+            writer.innerHTML = randomQuote.writer;
+            // Update the share buttons with the new quote
+            const textToShare = encodeURIComponent(randomQuote.quote + " " + randomQuote.writer);
+            shareTwitter.href = `https://twitter.com/intent/tweet?text=${textToShare}`;
+            shareWhatsapp.href = `https://wa.me/?text=${textToShare}`;
+            shareThreads.href = `https://www.threads.net/t/?text=${textToShare}`;
+        }
+        // Event listeners
+        btn.addEventListener("click", updateQuote);
+        shareBtn.addEventListener("click", function () {
+            shareOptions.style.display = shareOptions.style.display === "block" ? "none" : "block";
+        });
+        // Initial quote setup
+        updateQuote();
+    </script>
+</body>
+</html>
